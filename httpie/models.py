@@ -137,8 +137,8 @@ class HTTPRequest(HTTPMessage):
             query=f'?{url.query}' if url.query else ''
         )
 
-        headers = self._orig.headers.copy()
-        if 'Host' not in self._orig.headers:
+        headers = dict(self._orig.headers)
+        if 'Host' not in headers:
             headers['Host'] = url.netloc.split('@')[-1]
 
         headers = [
